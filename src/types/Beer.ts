@@ -38,7 +38,7 @@ export interface IContentContext {
   setFavBeers: (v: IBeer[]) => void
 }
 
-const beerInitial: IBeer = {
+export const beerInitial: IBeer = {
   id: 0,
   name: '',
   tagline: '',
