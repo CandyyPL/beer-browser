@@ -17,6 +17,10 @@ export const ModalWrapper = styled(ReactModal)`
   border-radius: 20px;
   padding: 50px;
 
+  &:focus {
+    outline: none;
+  }
+
   .close {
     position: absolute;
     top: 25px;
@@ -56,10 +60,6 @@ export const ModalContent = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
-  &:focus {
-    outline: none;
-  }
 
   .image {
     width: 25%;

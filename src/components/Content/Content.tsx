@@ -5,8 +5,12 @@ import { ContentContext } from '@/providers/ContentProvider'
 import { IBeer, IContentContext } from '@/types/Beer'
 import { FC, useContext } from 'react'
 
-const Content: FC = () => {
-  const { beers, fav, setFav } = useContext<IContentContext>(ContentContext)
+interface IContentProps {
+  beers: IBeer[]
+}
+
+const Content: FC<IContentProps> = ({ beers }) => {
+  const { fav } = useContext<IContentContext>(ContentContext)
 
   const { isOpen, handleOpenModal, handleCloseModal, beer, setBeer } = useModal()
 
@@ -17,16 +21,18 @@ const Content: FC = () => {
 
   return (
     <ContentWrapper>
-      {beers.length > 0
-        ? beers.map(b => (
-            <Beer key={b.id} onClick={() => openModal(b)}>
-              <div className='image'>
-                <img src={b.image_url} alt='beer' />
-              </div>
-              <div className='title'>{b.name}</div>
-            </Beer>
-          ))
-        : null}
+      {beers.length > 0 ? (
+        beers.map(b => (
+          <Beer key={b.id} onClick={() => openModal(b)} fav={fav.includes(b.id)}>
+            <div className='image'>
+              <img src={b.image_url} alt='beer' />
+            </div>
+            <div className='title'>{b.name}</div>
+          </Beer>
+        ))
+      ) : (
+        <h1 style={{ fontSize: '30px', fontFamily: 'Nunito', color: '#111' }}>Nothing here!</h1>
+      )}
       <Modal isOpen={isOpen} handleClose={handleCloseModal} beer={beer} />
     </ContentWrapper>
   )

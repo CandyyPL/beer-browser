@@ -64,7 +64,7 @@ export const TopbarWrapper = styled.div`
   }
 `
 
-export const Favorite = styled.span`
+export const MenuButton = styled.span`
   cursor: pointer;
 
   position: relative;

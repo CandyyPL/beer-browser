@@ -11,9 +11,15 @@ export const ContentWrapper = styled.div`
   grid-template-rows: repeat(10, 1fr);
 `
 
-export const Beer = styled.div`
+interface IBeerProps {
+  fav: boolean
+}
+
+export const Beer = styled.div<IBeerProps>`
   width: 350px;
   height: 350px;
+
+  background-color: ${({ fav }) => (fav ? '#71ebbc44' : null)};
 
   place-self: center;
   margin: 20px;

@@ -1,14 +1,17 @@
 import Content from '@/components/Content/Content'
 import Topbar from '@/components/Topbar/Topbar'
 import { MainPageWrapper } from '@/pages/Main/MainPage.styles'
-import { FC } from 'react'
+import { ContentContext } from '@/providers/ContentProvider'
+import { IContentContext } from '@/types/Beer'
+import { FC, useContext } from 'react'
 
 const MainPage: FC = () => {
+  const { beers } = useContext<IContentContext>(ContentContext)
+
   return (
     <MainPageWrapper>
-      <Topbar />
       <div className='contentWrapper'>
-        <Content />
+        <Content beers={beers} />
       </div>
     </MainPageWrapper>
   )

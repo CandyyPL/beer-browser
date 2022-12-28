@@ -31,6 +31,8 @@ const ContentProvider: FC<Props> = ({ children }) => {
       const newFavBeers = [...favBeers, beer.data[0]]
       setFavBeers(newFavBeers)
     })
+
+    if (fav.length == 0) setFavBeers([])
   }, [fav])
 
   const provide = { beers, fav, favBeers, setBeers, setFav, setFavBeers }
