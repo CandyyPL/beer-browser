@@ -1,7 +1,8 @@
 import { ModalContent, ModalWrapper } from '@/components/Modal/Modal.styles'
-import { IBeer } from '@/types/Beer'
-import { FC } from 'react'
+import { IBeer, IContentContext } from '@/types/Beer'
+import { FC, useContext } from 'react'
 import closeImg from '@/assets/close.png'
+import { ContentContext } from '@/providers/ContentProvider'
 
 interface IModalProps {
   beer: IBeer
@@ -11,6 +12,19 @@ interface IModalProps {
 
 const Modal: FC<IModalProps> = ({ beer, isOpen, handleClose }) => {
   const modalRoot = document.getElementById('root') as HTMLElement
+
+  const { fav, setFav } = useContext<IContentContext>(ContentContext)
+
+  const handleAddFav = (id: number) => {
+    if (!fav.includes(id)) {
+      const newFav = [...fav, id]
+      setFav(newFav)
+      return
+    }
+
+    const newFav = fav.filter(i => i !== id)
+    setFav(newFav)
+  }
 
   return (
     <ModalWrapper
@@ -23,13 +37,16 @@ const Modal: FC<IModalProps> = ({ beer, isOpen, handleClose }) => {
       <ModalContent>
         <div className='image'>
           <img src={beer.image_url} alt='beer' />
+          <button className='fav' onClick={() => handleAddFav(beer.id)}>
+            {fav.includes(beer.id) ? 'Delete from Favorites' : 'Add to Favorites'}
+          </button>
         </div>
         <div className='info'>
           <div className='name'>
             <span>{beer.name}</span>
           </div>
           <div className='tagline'>
-            <span>{beer.tagline.toUpperCase().slice(0, -1)}</span>
+            <span>{beer.tagline.toUpperCase()}</span>
           </div>
           <div className='details'>
             <div className='first'>
@@ -41,16 +58,40 @@ const Modal: FC<IModalProps> = ({ beer, isOpen, handleClose }) => {
             <div className='ph'>
               <span>pH: {beer.ph}</span>
             </div>
+            <div className='temp'>
+              <span>Fermentation temp: {beer.method.fermentation.temp.value}°C</span>
+            </div>
           </div>
           <div className='description'>
             <span>{beer.description}</span>
           </div>
-          <div className='tips'>
-            <span>{beer.brewers_tips}</span>
+          <div className='ingredients'>
+            <span className='title'>
+              INGREDIENTS (for {beer.volume.value} {beer.volume.unit} volume)
+            </span>
+            <div className='ingredientsDetails'>
+              <div className='malt'>
+                <span className='title'>MALT</span>
+                {beer.ingredients.malt.map(m => (
+                  <span className='group'>
+                    <span>{m.name}</span>
+                    <span className='amount'>{m.amount.value} kg</span>
+                  </span>
+                ))}
+              </div>
+              <div className='hops'>
+                <span className='title'>HOPS</span>
+                {beer.ingredients.hops.map(h => (
+                  <span className='group'>
+                    <span>{h.name}</span>
+                    <span className='amount'>{h.amount.value} kg</span>
+                    <span>add on {h.add}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className='food'>
-            {beer.food_pairing.length > 0 ? beer.food_pairing.map(fp => <span>{fp}</span>) : null}
-          </div>
+          <div className='yeast'>Yeast: {beer.ingredients.yeast}</div>
         </div>
       </ModalContent>
     </ModalWrapper>

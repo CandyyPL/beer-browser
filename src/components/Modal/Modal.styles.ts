@@ -8,7 +8,7 @@ export const ModalWrapper = styled(ReactModal)`
 
   transform: translate(-50%, -50%);
 
-  width: 60%;
+  width: 80%;
   height: 75%;
 
   background-color: #fff;
@@ -57,16 +57,44 @@ export const ModalContent = styled.div`
   justify-content: space-around;
   align-items: center;
 
+  &:focus {
+    outline: none;
+  }
+
   .image {
     width: 25%;
     height: 100%;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 
     img {
-      height: 90%;
+      height: 80%;
+    }
+
+    .fav {
+      width: 100%;
+      height: 10%;
+
+      background-color: #fff;
+
+      border: 4px solid #111;
+      border-radius: 10px;
+
+      font-size: 18px;
+      font-weight: bold;
+      color: #111;
+
+      cursor: pointer;
+
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #111;
+        color: #eee;
+      }
     }
   }
 
@@ -87,7 +115,7 @@ export const ModalContent = styled.div`
     }
 
     .details {
-      width: 80%;
+      width: 100%;
       height: 50px;
 
       display: flex;
@@ -101,6 +129,52 @@ export const ModalContent = styled.div`
       margin-top: 20px;
 
       font-size: 22px;
+    }
+
+    .ingredients {
+      margin-top: 20px;
+
+      span.title {
+        font-size: 18px;
+        font-weight: bolder;
+      }
+
+      .ingredientsDetails {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        margin-top: 20px;
+
+        .malt,
+        .hops {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+
+          span.group {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+          }
+
+          span:not(.group) {
+            width: 200px;
+          }
+
+          span.amount {
+            width: 100px;
+          }
+        }
+      }
+    }
+
+    .yeast {
+      font-size: 20px;
+      font-weight: bolder;
+
+      margin-top: 20px;
     }
   }
 `

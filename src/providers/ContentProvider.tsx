@@ -19,7 +19,7 @@ const ContentProvider: FC<Props> = ({ children }) => {
   useEffect(() => {
     ;(async () => {
       const page = Math.floor(Math.random() * 10) + 1
-      const beers = await axios.get(`${baseUrl}?page=${page}&per_page=40`)
+      const beers = await axios.get(`${baseUrl}?page=1&per_page=40`)
       setBeers(beers.data)
       setLoading(false)
     })()

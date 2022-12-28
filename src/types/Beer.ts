@@ -1,5 +1,8 @@
+import { MouseEventHandler } from 'react'
+
 interface IIngredient {
   name: string
+  add: string
   amount: {
     value: number
     unit: string
@@ -15,18 +18,22 @@ export interface IBeer {
   image_url: string
   abv: number
   ph: number
-  fermentation: {
-    temp: {
-      value: number
+  method: {
+    fermentation: {
+      temp: {
+        value: number
+      }
     }
+  }
+  volume: {
+    value: number
+    unit: string
   }
   ingredients: {
     malt: IIngredient[]
     hops: IIngredient[]
     yeast: string
   }
-  food_pairing: string[]
-  brewers_tips: string
 }
 
 export interface IContentContext {
@@ -47,18 +54,22 @@ export const beerInitial: IBeer = {
   image_url: '',
   abv: 0,
   ph: 0,
-  fermentation: {
-    temp: {
-      value: 0,
+  method: {
+    fermentation: {
+      temp: {
+        value: 0,
+      },
     },
+  },
+  volume: {
+    value: 0,
+    unit: '',
   },
   ingredients: {
     malt: [],
     hops: [],
     yeast: '',
   },
-  food_pairing: [],
-  brewers_tips: '',
 }
 
 export const contentInitial: IContentContext = {

@@ -27,23 +27,7 @@ export const Beer = styled.div`
     background-color: #ddd;
   }
 
-  .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-
-    cursor: pointer;
-
-    &.active {
-      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-    }
-  }
-
   position: relative;
-
-  .fav {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-  }
 
   display: flex;
   flex-direction: column;
@@ -51,7 +35,7 @@ export const Beer = styled.div`
   align-items: center;
 
   .image {
-    width: 100%;
+    width: 80%;
     height: 75%;
 
     display: flex;
