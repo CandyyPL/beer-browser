@@ -1,10 +1,21 @@
+import App from '@/App'
+import GlobalStyle from '@/assets/styles/GlobalStyle'
+import ContentProvider from '@/providers/ContentProvider'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import WebFont from 'webfontloader'
+
+WebFont.load({
+  google: {
+    families: ['Nunito'],
+  },
+})
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <GlobalStyle />
+    <ContentProvider>
+      <App />
+    </ContentProvider>
+  </React.StrictMode>
 )
